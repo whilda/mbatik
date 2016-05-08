@@ -16,11 +16,6 @@ class DashboardController extends Controller
     {
         return view('overview');
     }
-    
-    public function item()
-    {
-    	return view('item');
-    }
  
     public function transaction()
     {

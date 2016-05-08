@@ -66,6 +66,7 @@
             <li><a href="#">Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
+          	<li @yield('vendor')><a href="./vendor">Vendor</a></li>
             <li @yield('item')><a href="./item">Item</a></li>
             <li @yield('transaction')><a href="./transaction">Transaction</a></li>
           </ul>

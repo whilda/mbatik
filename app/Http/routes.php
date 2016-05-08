@@ -21,15 +21,15 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/', 'DashboardController@overview');
-    Route::get('/item', 'DashboardController@item');
     Route::get('/transaction', 'DashboardController@transaction');
+    
+    Route::get('/vendor', 'VendorController@GetView');
+    Route::post('/vendor', 'VendorController@Save');
+    
+    Route::get('/item', 'ItemController@GetView');
+    Route::post('/item', 'ItemController@Save');
 });
