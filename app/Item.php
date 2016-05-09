@@ -8,9 +8,22 @@ class Item extends Model
 {
 	protected $table = 'items';
 	protected $fillable = [
-			'name'
+			'vendor_id',
+			'code',
+			'purchase_price',
+			'sell_price',
+			'quantity',
+			'note'	
 	];
 	public static $rules = array(
-			'name' => 'required|min:5'
+			'vendor_id' => 'required',
+			'code' => 'required',
+			'purchase_price' => 'required',
+			'sell_price' => 'required',
+			'quantity' => 'required'
 	);
+	public function vendor()
+	{
+		return $this->belongsTo('App\Vendor','vendor_id');
+	}
 }

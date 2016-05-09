@@ -13,4 +13,8 @@ class Vendor extends Model
 	public static $rules = array(
 			'name' => 'required|min:5'
 	);
+	public function item()
+	{
+		return $this->hasMany('App\Item');
+	}
 }
