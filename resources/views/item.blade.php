@@ -58,7 +58,8 @@
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Tag</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="tag" name="tag" placeholder="text">
+			    <ul id=tag name="tag"></ul>
+			    <input type="hidden" id="tag-result" name="tag-result" value="">
 			    </div>
 			  </div>
 			  <div class="form-group row">
@@ -120,16 +121,20 @@
 @endsection
 
 @section('script')
-	<script>
-		$(function()
-		{
-			 $( "#vendor_name" ).autocomplete({
-			  source: "vendor/autocomplete",
-			  minLength: 1,
-			  select: function(event, ui) {
-			  	$('#vendor_name').val(ui.item.value);
-			  }
-			});
-		});
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	        $("#tag").tagit({
+	        	availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"],
+	        	autocomplete: {delay: 0, minLength: 0},
+	        	afterTagAdded: function(evt, ui) {
+                    $var = $(".tagit-label").map(function() { return $(this).html();}).get();
+                    $("#tag-result").val(JSON.stringify($var));
+                },
+                afterTagRemoved: function(evt, ui) {
+                	$var = $(".tagit-label").map(function() { return $(this).html();}).get();
+                    $("#tag-result").val(JSON.stringify($var));
+                },
+	        });
+	    });
 	</script>
 @endsection

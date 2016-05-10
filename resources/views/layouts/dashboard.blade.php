@@ -21,7 +21,9 @@
 
     <!-- Custom styles for this template -->
     <link href="../resources/assets/css/dashboard.css" rel="stylesheet">
-
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+	<link href="../resources/assets/css/jquery.tagit.css" rel="stylesheet" type="text/css">
+	<link href="../resources/assets/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../resources/assets/js/ie-emulation-modes-warning.js"></script>
@@ -81,8 +83,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../resources/assets/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="../resources/assets/js/holder.min.js"></script>
@@ -92,6 +93,7 @@
     <!-- App JavaScript
     ================================================== -->
     <script src="../resources/assets/js/dashboard.js"></script>
+    <script src="../resources/assets/js/tag-it.min.js" type="text/javascript" charset="utf-8"></script>
     @yield('script')
   </body>
 </html>
