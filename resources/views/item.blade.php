@@ -15,12 +15,11 @@
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Vendor</label>
 			    <div class="col-sm-10">			      
 			      	<select class="form-control" id="vendor_id" name="vendor_id">
+					  	<option value="-">-</option>
 					  	@if ($vendors->count())
 				            @foreach ($vendors as $vendor)
 				                <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
 				            @endforeach
-				        @else
-				    		<option value="-">-</option>
 						@endif
 					</select>
 			    </div>
@@ -87,6 +86,7 @@
 		        <thead>
 		            <tr>
 				        <th>Code</th>
+				        <th>Tag</th>
 				        <th>Vendor</th>
 				        <th>Purchase</th>
 				        <th>Sell</th>
@@ -99,6 +99,7 @@
 		            @foreach ($items as $item)
 		                <tr>
 					          <td>{{ $item->code }}</td>
+					          <td>{{ $item->tagsView() }}</td>
 					          <td>{{ $item->vendor->name }}</td>
 					          <td>{{ $item->purchase_price }}</td>
 					          <td>{{ $item->sell_price }}</td>
@@ -108,12 +109,7 @@
 		            @endforeach
 		        @else
 		    		<tr>
-				        <td>-</td>
-						<td>There are no Vendor</td>
-						<td>-</td>
-						<td>-</td>
-						<td>-</td>
-						<td>-</td>
+						<td colspan="7">There are no item</td>
 		            </tr>
 				@endif
 		        </tbody>
@@ -124,8 +120,8 @@
 	<script type="text/javascript">
 	    $(document).ready(function() {
 	        $("#tag").tagit({
-	        	availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"],
 	        	autocomplete: {delay: 0, minLength: 0},
+	        	removeConfirmation: true,
 	        	afterTagAdded: function(evt, ui) {
                     $var = $(".tagit-label").map(function() { return $(this).html();}).get();
                     $("#tag-result").val(JSON.stringify($var));
@@ -134,6 +130,15 @@
                 	$var = $(".tagit-label").map(function() { return $(this).html();}).get();
                     $("#tag-result").val(JSON.stringify($var));
                 },
+                tagSource: function(search, showChoices) {
+                    $.ajax({
+                      url: "./tag/all",
+                      data: {search: search.term},
+                      success: function(choices) {
+                        showChoices(choices);
+                      }
+                    });
+                }
 	        });
 	    });
 	</script>

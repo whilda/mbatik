@@ -32,4 +32,6 @@ Route::group(['middleware' => 'web'], function () {
     
     Route::get('/item', 'ItemController@GetView');
     Route::post('/item', 'ItemController@Save');
+    
+    Route::get('/tag/all', 'TagController@GetAllTag');
 });

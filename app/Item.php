@@ -26,4 +26,15 @@ class Item extends Model
 	{
 		return $this->belongsTo('App\Vendor','vendor_id');
 	}
+	public function tags()
+	{
+		return $this->belongsToMany('App\Tag', 'items_tags', 'item_id', 'tag_id');
+	}
+	public function tagsView(){
+		$str = '';
+		foreach ($this->tags->lists('tag') as $tag){
+			$str = $str.' '.$tag;
+		}
+		return $str;
+	}
 }

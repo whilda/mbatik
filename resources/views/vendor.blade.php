@@ -46,7 +46,6 @@
             @endforeach
         @else
     		<tr>
-		        <td>-</td>
 				<td>There are no Vendor</td>
             </tr>
 		@endif
