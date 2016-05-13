@@ -24,8 +24,11 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    Route::get('/test', 'DashboardController@testing_purpose');
+    
     Route::get('/', 'DashboardController@overview');
     Route::get('/transaction', 'DashboardController@transaction');
+    Route::get('/api/asset', 'DashboardController@api_asset');
     
     Route::get('/vendor', 'VendorController@GetView');
     Route::post('/vendor', 'VendorController@Save');

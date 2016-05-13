@@ -383,7 +383,8 @@
 			// Apply the theme
 			Highcharts.setOptions(Highcharts.theme);
 			
-		    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+		    //$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+		    $.getJSON('./api/asset', function (data) {
 		        // Create the chart
 		        $('#container').highcharts('StockChart', {
 		            rangeSelector : {
