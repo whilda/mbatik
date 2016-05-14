@@ -40,7 +40,7 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="./">
-          	<img src="http://localhost/mbatik/resources/image/simple_edited.png" style="height: 50px;"/>
+          	<img src="../../resources/image/simple_edited.png" style="height: 50px;"/>
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
