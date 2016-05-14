@@ -64,14 +64,14 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li @yield('overview')><a href="./">Overview</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
+            <li><a href="#">*Reports</a></li>
+            <li><a href="#">*Analytics</a></li>
+            <li><a href="#">*Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
           	<li @yield('vendor')><a href="./vendor">Vendor</a></li>
             <li @yield('item')><a href="./item">Item</a></li>
-            <li @yield('stock')><a href="#">Stock</a></li>
+            <li @yield('stock')><a href="#">*Stock</a></li>
             <li @yield('transaction')><a href="./transaction">Transaction</a></li>
           </ul>
         </div>
