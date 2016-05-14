@@ -63,7 +63,7 @@ body {
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
   color: #fff;
-  background-color: #428bca;
+  background-color: #f2861a;
 }
 
 
@@ -102,4 +102,9 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+.navbar-brand {
+	padding: 0px 0px 0px 0px;
+}
 }

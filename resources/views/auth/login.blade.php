@@ -41,7 +41,7 @@
 	        	</table>	        			    		        
 	        </div> 
 	        <button type="submit" class="login__submit">Sign in</button>
-	        <p class="login__signup">Don't have an account? &nbsp;<a href="{{ url('/register') }}">Sign up</a></p>	          
+	        <!-- <p class="login__signup">Don't have an account? &nbsp;<a href="{{ url('/register') }}">Sign up</a></p> -->	          
         </form>
       </div>
     </div>

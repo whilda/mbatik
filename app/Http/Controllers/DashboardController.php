@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AssetHistory;
+use App\Item;
 use DB;
 
 class DashboardController extends Controller
@@ -29,9 +30,12 @@ class DashboardController extends Controller
     
     public function overview()
     {
-        return view('overview');
+        return view('overview', $this->PrepareData());
     }
- 
+ 	
+    public function PrepareData(){
+    	return ['items' => Item::where('quantity','<','5')->get()];
+    }
     public function transaction()
     {
     	return view('transaction');

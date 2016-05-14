@@ -24,7 +24,7 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/test', 'DashboardController@testing_purpose');
+    Route::get('/test', 'ItemController@run');
     
     Route::get('/', 'DashboardController@overview');
     Route::get('/transaction', 'DashboardController@transaction');

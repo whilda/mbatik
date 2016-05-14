@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->integer('purchase_price');
             $table->integer('sell_price');
             $table->integer('quantity');
-            $table->integer('note');
+            $table->string('note');
             $table->timestamps();
         });
     }

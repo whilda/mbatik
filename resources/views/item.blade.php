@@ -10,7 +10,19 @@
 
 @section('content')
         	<h1 class="page-header">Item Input</h1>
-        	<form method="post" action="./item">
+        	@if ($errors->any())
+			    <ul class="alert alert-danger" style="padding-left: 2em;">
+			        @foreach ($errors->all() as $error)
+		                <li>{{ $error }}</li>
+		            @endforeach
+			    </ul>
+			@endif
+			@if (isset($success))
+			    <div class="alert alert-success" style="padding-left: 2em;">
+			        Data has been saved successfully
+			    </div>
+			@endif
+        	<form method="post" action="./item" onsubmit="return confirm('Are you sure you want to submit?');">
         	  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Vendor</label>
 			    <div class="col-sm-10">			      
@@ -18,7 +30,14 @@
 					  	<option value="-">-</option>
 					  	@if ($vendors->count())
 				            @foreach ($vendors as $vendor)
-				                <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+				                <option 
+				                @if($errors->any())
+				                	@if($inputs['vendor_id'] == $vendor->id)
+				                		selected='selected'
+				                	@endif	
+				                @endif 
+				                
+				                value="{{ $vendor->id }}">{{ $vendor->name }}</option>
 				            @endforeach
 						@endif
 					</select>
@@ -27,7 +46,7 @@
 			  <div class="form-group row">
 			    <label for="inputEmail3" class="col-sm-2 form-control-label">Code</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="code" name="code" placeholder="Item Code">
+			      <input type="text" value='@if($errors->any()){{ $inputs['code'] }}@endif' class="form-control" id="code" name="code" placeholder="Item Code">
 			    </div>
 			  </div>
 			  <div class="form-group row">
@@ -35,7 +54,7 @@
 			    <div class="col-sm-10">
 			      <div class="input-group">
 					  <span class="input-group-addon">Rp</span>
-					  <input type="text" class="form-control" id="purchase_price" name="purchase_price" placeholder="Amount">
+					  <input type="number" value='@if ($errors->any()){{ $inputs['purchase_price'] }}@endif' class="form-control" id="purchase_price" name="purchase_price" placeholder="Amount">
 					</div>
 			    </div>
 			  </div>
@@ -44,27 +63,36 @@
 			    <div class="col-sm-10">
 			      <div class="input-group">
 					  <span class="input-group-addon">Rp</span>
-					  <input type="text" class="form-control" id="sell_price" name="sell_price" placeholder="Amount">
+					  <input type="number" value='@if ($errors->any()){{ $inputs['sell_price'] }}@endif' class="form-control" id="sell_price" name="sell_price" placeholder="Amount">
 					</div>
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Quantity</label>
 			    <div class="col-sm-10">
-			      <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity">
+			      <input type="number" value='@if ($errors->any()){{ $inputs['quantity'] }}@endif' class="form-control" id="quantity" name="quantity" placeholder="Quantity">
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Tag</label>
 			    <div class="col-sm-10">
-			    <ul id=tag name="tag"></ul>
+			    <ul id=tag name="tag">
+			    @if ($errors->any())
+			    	@foreach ((json_decode($inputs['tag-result'])) as $tag)
+						<li>{{$tag}}</li>
+		            @endforeach
+			    @endif
+			    </ul>
 			    <input type="hidden" id="tag-result" name="tag-result" value="">
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Note</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="note" name="note" placeholder="Note">
+			    
+			      <input type="text" value='@if ($errors->any()){{ $inputs['note'] }}@endif' class="form-control" id="note" name="note" placeholder="Note">
+			    
+			    
 			    </div>
 			  </div>
 			  <div class="form-group row">
@@ -74,14 +102,6 @@
 			    </div>
 			  </div>
 			</form>
-			
-			@if ($errors->any())
-			    <ul>
-			        @foreach ($errors->all() as $error)
-		                <li>{{ $error }}</li>
-		            @endforeach
-			    </ul>
-			@endif
 			<table class="table table-striped table-bordered">
 		        <thead>
 		            <tr>

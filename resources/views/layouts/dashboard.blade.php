@@ -7,8 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
+	<link rel="icon" href="../resources/image/logo.ico">
     <title>
     	@yield('title')
     </title>
@@ -21,7 +20,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../resources/assets/css/dashboard.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" >
 	<link href="../resources/assets/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 	<link href="../resources/assets/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -40,7 +39,9 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Batik Shop</a>
+          <a class="navbar-brand" href="./">
+          	<img src="http://localhost/mbatik/resources/image/simple_edited.png" style="height: 50px;"/>
+          </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -70,6 +71,7 @@
           <ul class="nav nav-sidebar">
           	<li @yield('vendor')><a href="./vendor">Vendor</a></li>
             <li @yield('item')><a href="./item">Item</a></li>
+            <li @yield('stock')><a href="#">Stock</a></li>
             <li @yield('transaction')><a href="./transaction">Transaction</a></li>
           </ul>
         </div>
