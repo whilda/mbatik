@@ -82,7 +82,7 @@ input, button {
           transform: scale(1.1);
 }
 .login__check {
- background-image: url("../../resources/image/full.png");
+ background-image: url("../../../resources/image/full.png");
  background-size: 300px 200px;
  height: 200px;
 }
