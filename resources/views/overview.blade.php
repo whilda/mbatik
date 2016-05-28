@@ -28,16 +28,17 @@
 
           <h2 class="sub-header">Low Stock</h2>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
 		        <thead>
 		            <tr>
 				        <th>Code</th>
-				        <th>Tag</th>
 				        <th>Vendor</th>
+				        <th>Type</th>
+				        <th>Material</th>
+				        <th>Note</th>
 				        <th>Purchase</th>
 				        <th>Sell</th>
 				        <th>Quantity</th>
-				        <th>Note</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -45,17 +46,18 @@
 		            @foreach ($items as $item)
 		                <tr>
 					          <td>{{ $item->code }}</td>
-					          <td>{{ $item->tagsView() }}</td>
 					          <td>{{ $item->vendor->name }}</td>
+					          <td>{{ $item->type->name }}</td>
+					          <td>{{ $item->material->name }}</td>
+					          <td>{{ $item->note }}</td>
 					          <td>{{ $item->purchase_price }}</td>
 					          <td>{{ $item->sell_price }}</td>
 					          <td>{{ $item->quantity }}</td>
-					          <td>{{ $item->note }}</td>
 		                </tr>
 		            @endforeach
 		        @else
 		    		<tr>
-						<td colspan="7">Stock is safe</td>
+						<td colspan="7">There are no item</td>
 		            </tr>
 				@endif
 		        </tbody>

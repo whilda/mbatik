@@ -14,7 +14,7 @@
         	  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Vendor</label>
 			    <div class="col-sm-10">			      
-			      <input type="text" class="form-control" id="name" name="name" placeholder="Vendor Name">
+			      <input type="text" class="form-control" id="name" name="name" placeholder="Vendor">
 			    </div>
 			  </div>
 			  <div class="form-group row">
@@ -34,6 +34,7 @@
 	<table class="table table-striped table-bordered">
         <thead>
             <tr>
+		        <th>ID</th>
 		        <th>Name</th>
             </tr>
         </thead>
@@ -41,12 +42,13 @@
         @if ($vendors->count())
             @foreach ($vendors as $vendor)
                 <tr>
+			          <td>{{ $vendor->id }}</td>
 			          <td>{{ $vendor->name }}</td>
                 </tr>
             @endforeach
         @else
     		<tr>
-				<td>There are no Vendor</td>
+				<td colspan="2">There are no vendor</td>
             </tr>
 		@endif
         </tbody>

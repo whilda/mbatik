@@ -23,6 +23,7 @@
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" >
 	<link href="../resources/assets/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 	<link href="../resources/assets/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../resources/assets/js/ie-emulation-modes-warning.js"></script>
@@ -40,7 +41,7 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="./">
-          	<img src="../../resources/image/simple_edited.png" style="height: 50px;"/>
+          	<img src="../resources/image/simple_edited.png" style="height: 50px;"/>
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -63,16 +64,16 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li @yield('overview')><a href="./">Overview</a></li>
-            <li><a href="#">*Reports</a></li>
-            <li><a href="#">*Analytics</a></li>
-            <li><a href="#">*Export</a></li>
+            <li @yield('overview')><a href="./"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Overview</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-          	<li @yield('vendor')><a href="./vendor">Vendor</a></li>
-            <li @yield('item')><a href="./item">Item</a></li>
-            <li @yield('stock')><a href="#">*Stock</a></li>
-            <li @yield('transaction')><a href="./transaction">Transaction</a></li>
+          	<li @yield('vendor')><a href="./vendor"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Vendor</a></li>
+          	<li @yield('type')><a href="./type"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Type</a></li>
+          	<li @yield('material')><a href="./material"><span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span> Material</a></li>
+            <li @yield('item')><a href="./item"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Item</a></li>
+            <li @yield('stock')><a href="./stock"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Stock</a></li>
+            <li @yield('transaction')><a href="./transaction"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Transaction</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

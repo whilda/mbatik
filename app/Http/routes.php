@@ -33,8 +33,17 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/vendor', 'VendorController@GetView');
     Route::post('/vendor', 'VendorController@Save');
     
+    Route::get('/type', 'TypeController@GetView');
+    Route::post('/type', 'TypeController@Save');
+    
+    Route::get('/material', 'MaterialController@GetView');
+    Route::post('/material', 'MaterialController@Save');
+    
     Route::get('/item', 'ItemController@GetView');
     Route::post('/item', 'ItemController@Save');
     
-    Route::get('/tag/all', 'TagController@GetAllTag');
+    Route::get('/stock', 'ItemController@GetStockView');
+    Route::post('/stock', 'ItemController@SaveStock');
+    
+    Route::get('/item/{id}', 'ItemController@GetItem');
 });

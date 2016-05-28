@@ -6,7 +6,8 @@ use Input;
 use Validator;
 use App\Item;
 use App\Vendor;
-use App\Tag;
+use App\Type;
+use App\Material;
 
 class ItemController extends Controller
 {
@@ -16,7 +17,7 @@ class ItemController extends Controller
     }
     
     public function PrepareData(){
-    	return ['items' => Item::all(), 'vendors' => Vendor::all()];
+    	return ['items' => Item::all(), 'vendors' => Vendor::all(), 'types' => Type::all(), 'materials' => Material::all()];
     }
     
     public function GetView()
@@ -24,11 +25,6 @@ class ItemController extends Controller
     	return View('item', $this->PrepareData());
     }
     
-    public function run()
-    {
-    	echo Tag::where('tag','gaul')->count();
-    }
-
     public function Save()
     {
     	$input = Input::all();
@@ -49,21 +45,36 @@ class ItemController extends Controller
     			->with('inputs', $input)
     			->withErrors("Must choose vendor");
     	
+    	if(Input::get('type_id') == '-')
+    		return View('item', $this->PrepareData())
+    			->with('inputs', $input)
+    			->withErrors("Must choose type");
+    
+    	if(Input::get('material_id') == '-')
+    		return View('item', $this->PrepareData())
+    			->with('inputs', $input)
+    			->withErrors("Must choose material");
+    				
    		$item = Item::create($input);
-   		$arr_tag_id = array();
-   		 
-   		$tags = json_decode($input['tag-result']);
-   		foreach ($tags as $tag){
-   			$is_tag_exist = Tag::where("tag",$tag)->count();
-   			$tag_id = 0;
-   			if($is_tag_exist == 0){
-   				$tag_id = Tag::create(['tag' => $tag])->id;
-   			} else {
-   				$tag_id = Tag::where("tag",$tag)->first()->id;
-   			}
-   			array_push($arr_tag_id,$tag_id);
-   		}
-   		$item->tags()->sync($arr_tag_id);
    		return View('item', $this->PrepareData())->with('success', 'ok');
+    }
+    
+    public function GetStockView()
+    {
+    	return View('stock', ["items" => Item::all()]);
+    }
+	public function GetItem($id)
+    {
+    	$item = Item::where("id",$id)->first();
+    	$json_obj = array(
+    		'vendor' => $item->vendor->name,
+    		'type' => $item->type->name,
+    		'material' => $item->material->name,
+    		'note' => $item->note,
+    		'purchase_price' => $item->purchase_price,
+    		'sell_price' => $item->sell_price,
+    		'quantity' => $item->quantity,
+    	); 
+    	return json_encode($json_obj);
     }
 }

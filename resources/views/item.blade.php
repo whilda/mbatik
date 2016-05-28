@@ -23,7 +23,13 @@
 			    </div>
 			@endif
         	<form method="post" action="./item" onsubmit="return confirm('Are you sure you want to submit?');">
-        	  <div class="form-group row">
+			  <div class="form-group row">
+			    <label for="inputEmail3" class="col-sm-2 form-control-label">Code</label>
+			    <div class="col-sm-10">
+			      <input type="text" value='@if($errors->any()){{ $inputs['code'] }}@endif' class="form-control" id="code" name="code" readonly="readonly">
+			    </div>
+			  </div>
+			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Vendor</label>
 			    <div class="col-sm-10">			      
 			      	<select class="form-control" id="vendor_id" name="vendor_id">
@@ -44,9 +50,49 @@
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label for="inputEmail3" class="col-sm-2 form-control-label">Code</label>
+			    <label for="inputPassword3" class="col-sm-2 form-control-label">Type</label>
+			    <div class="col-sm-10">			      
+			      	<select class="form-control" id="type_id" name="type_id">
+					  	<option value="-">-</option>
+					  	@if ($types->count())
+				            @foreach ($types as $type)
+				                <option 
+				                @if($errors->any())
+				                	@if($inputs['type_id'] == $type->id)
+				                		selected='selected'
+				                	@endif	
+				                @endif 
+				                
+				                value="{{ $type->id }}">{{ $type->name }}</option>
+				            @endforeach
+						@endif
+					</select>
+			    </div>
+			  </div>
+			  <div class="form-group row">
+			    <label for="inputPassword3" class="col-sm-2 form-control-label">Material</label>
+			    <div class="col-sm-10">			      
+			      	<select class="form-control" id="material_id" name="material_id">
+					  	<option value="-">-</option>
+					  	@if ($materials->count())
+				            @foreach ($materials as $material)
+				                <option 
+				                @if($errors->any())
+				                	@if($inputs['material_id'] == $material->id)
+				                		selected='selected'
+				                	@endif	
+				                @endif 
+				                
+				                value="{{ $material->id }}">{{ $material->name }}</option>
+				            @endforeach
+						@endif
+					</select>
+			    </div>
+			  </div>
+			  <div class="form-group row">
+			    <label for="inputPassword3" class="col-sm-2 form-control-label">Note</label>
 			    <div class="col-sm-10">
-			      <input type="text" value='@if($errors->any()){{ $inputs['code'] }}@endif' class="form-control" id="code" name="code" placeholder="Item Code">
+			      <input type="text" value='@if ($errors->any()){{ $inputs['note'] }}@endif' class="form-control" id="note" name="note" placeholder="Note">  
 			    </div>
 			  </div>
 			  <div class="form-group row">
@@ -74,28 +120,6 @@
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label for="inputPassword3" class="col-sm-2 form-control-label">Tag</label>
-			    <div class="col-sm-10">
-			    <ul id=tag name="tag">
-			    @if ($errors->any())
-			    	@foreach ((json_decode($inputs['tag-result'])) as $tag)
-						<li>{{$tag}}</li>
-		            @endforeach
-			    @endif
-			    </ul>
-			    <input type="hidden" id="tag-result" name="tag-result" value="">
-			    </div>
-			  </div>
-			  <div class="form-group row">
-			    <label for="inputPassword3" class="col-sm-2 form-control-label">Note</label>
-			    <div class="col-sm-10">
-			    
-			      <input type="text" value='@if ($errors->any()){{ $inputs['note'] }}@endif' class="form-control" id="note" name="note" placeholder="Note">
-			    
-			    
-			    </div>
-			  </div>
-			  <div class="form-group row">
 			    <div class="col-sm-offset-2 col-sm-10">
 			      <input type="hidden" name="_token" value="{{ csrf_token() }}">
 			      <button type="submit" class="btn btn-secondary">Save</button>
@@ -106,12 +130,13 @@
 		        <thead>
 		            <tr>
 				        <th>Code</th>
-				        <th>Tag</th>
 				        <th>Vendor</th>
+				        <th>Type</th>
+				        <th>Material</th>
+				        <th>Note</th>
 				        <th>Purchase</th>
 				        <th>Sell</th>
 				        <th>Quantity</th>
-				        <th>Note</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -119,12 +144,13 @@
 		            @foreach ($items as $item)
 		                <tr>
 					          <td>{{ $item->code }}</td>
-					          <td>{{ $item->tagsView() }}</td>
 					          <td>{{ $item->vendor->name }}</td>
+					          <td>{{ $item->type->name }}</td>
+					          <td>{{ $item->material->name }}</td>
+					          <td>{{ $item->note }}</td>
 					          <td>{{ $item->purchase_price }}</td>
 					          <td>{{ $item->sell_price }}</td>
 					          <td>{{ $item->quantity }}</td>
-					          <td>{{ $item->note }}</td>
 		                </tr>
 		            @endforeach
 		        @else
@@ -138,28 +164,24 @@
 
 @section('script')
 	<script type="text/javascript">
-	    $(document).ready(function() {
-	        $("#tag").tagit({
-	        	autocomplete: {delay: 0, minLength: 0},
-	        	removeConfirmation: true,
-	        	afterTagAdded: function(evt, ui) {
-                    $var = $(".tagit-label").map(function() { return $(this).html();}).get();
-                    $("#tag-result").val(JSON.stringify($var));
-                },
-                afterTagRemoved: function(evt, ui) {
-                	$var = $(".tagit-label").map(function() { return $(this).html();}).get();
-                    $("#tag-result").val(JSON.stringify($var));
-                },
-                tagSource: function(search, showChoices) {
-                    $.ajax({
-                      url: "./tag/all",
-                      data: {search: search.term},
-                      success: function(choices) {
-                        showChoices(choices);
-                      }
-                    });
-                }
-	        });
-	    });
+	    $("#vendor_id").change(function(){
+		    makeCode();
+		});
+	    $("#type_id").change(function(){
+		    makeCode();
+		});
+	    $("#material_id").change(function(){
+		    makeCode();
+		});
+	    $("#note").keyup(function(){
+		    makeCode();
+		});
+		function makeCode(){
+			$vendor_id = $("#vendor_id").val();
+			$type_id = $("#type_id").val();
+			$material_id = $("#material_id").val();
+			$note = $("#note").val();
+			$("#code").val($vendor_id+"-"+$type_id+"-"+$material_id+"-"+$note);
+		}
 	</script>
 @endsection

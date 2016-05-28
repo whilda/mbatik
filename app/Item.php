@@ -8,16 +8,21 @@ class Item extends Model
 {
 	protected $table = 'items';
 	protected $fillable = [
-			'vendor_id',
 			'code',
+			'vendor_id',
+			'type_id',
+			'material_id',
+			'note',
 			'purchase_price',
 			'sell_price',
-			'quantity',
-			'note'	
+			'quantity',	
 	];
 	public static $rules = array(
-			'vendor_id' => 'required',
 			'code' => 'required',
+			'vendor_id' => 'required',
+			'type_id' => 'required',
+			'material_id' => 'required',
+			'note' => 'required',
 			'purchase_price' => 'required',
 			'sell_price' => 'required',
 			'quantity' => 'required'
@@ -26,15 +31,12 @@ class Item extends Model
 	{
 		return $this->belongsTo('App\Vendor','vendor_id');
 	}
-	public function tags()
+	public function type()
 	{
-		return $this->belongsToMany('App\Tag', 'items_tags', 'item_id', 'tag_id');
+		return $this->belongsTo('App\Type','type_id');
 	}
-	public function tagsView(){
-		$str = '';
-		foreach ($this->tags->lists('tag') as $tag){
-			$str = $str.' '.$tag;
-		}
-		return $str;
+	public function material()
+	{
+		return $this->belongsTo('App\Material','material_id');
 	}
 }

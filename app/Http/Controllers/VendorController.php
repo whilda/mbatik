@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Vendor;
 use Input;
 use Validator;
+use App\Vendor;
 
 class VendorController extends Controller
 {
@@ -15,8 +15,7 @@ class VendorController extends Controller
     
     public function GetView()
     {
-    	$vendors = Vendor::all();
-    	return View('vendor',['vendors' => $vendors]);
+    	return View('vendor',['vendors' => Vendor::all()]);
     }
     
     public function Save()
@@ -26,12 +25,11 @@ class VendorController extends Controller
     	if ($validation->passes())
     	{
     		Vendor::create($input);
-    		return View('vendor',['vendors' => Vendor::all()]);
+    		return $this->GetView();
     	}
     	else
     	{
-    		return View('vendor',['vendors' => Vendor::all()])
-	    		->withErrors($validation);
+    		return $this->GetView()->withErrors($validation);
     	}
     }
 }

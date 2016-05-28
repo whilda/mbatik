@@ -8,6 +8,11 @@ html, body {
   font-size: 62.5%;
   height: 100%;
   overflow: hidden;
+  background: url("../../../resources/image/full.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .help-block{
