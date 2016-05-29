@@ -57,7 +57,7 @@
 		            @endforeach
 		        @else
 		    		<tr>
-						<td colspan="7">There are no item</td>
+						<td colspan="8">There are no item</td>
 		            </tr>
 				@endif
 		        </tbody>

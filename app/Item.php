@@ -27,6 +27,12 @@ class Item extends Model
 			'sell_price' => 'required',
 			'quantity' => 'required'
 	);
+	public static $rulesStock = array(
+			'item_id' => 'required',
+			'purchase_price' => 'required',
+			'sell_price' => 'required',
+			'quantity' => 'required'
+	);
 	public function vendor()
 	{
 		return $this->belongsTo('App\Vendor','vendor_id');

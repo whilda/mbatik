@@ -6,7 +6,7 @@
 	    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans'>
 	    <link rel="stylesheet" href="../resources/assets/css/login-page.css">
 	    <link rel="icon" href="../resources/image/logo.ico">
-	    @yield('title')
+	    <title>Gas Batik - @yield('title')</title>
 	</head>
   <body>
 

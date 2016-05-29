@@ -9,7 +9,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../resources/image/logo.ico">
     <title>
-    	@yield('title')
+    	Gas Batik - @yield('title')
     </title>
 
     <!-- Bootstrap core CSS -->
@@ -71,7 +71,9 @@
           	<li @yield('vendor')><a href="./vendor"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Vendor</a></li>
           	<li @yield('type')><a href="./type"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Type</a></li>
           	<li @yield('material')><a href="./material"><span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span> Material</a></li>
-            <li @yield('item')><a href="./item"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Item</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+          	<li @yield('item')><a href="./item"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Item</a></li>
             <li @yield('stock')><a href="./stock"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Stock</a></li>
             <li @yield('transaction')><a href="./transaction"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Transaction</a></li>
           </ul>

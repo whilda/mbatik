@@ -8,6 +8,7 @@ use App\Item;
 use App\Vendor;
 use App\Type;
 use App\Material;
+use App\ItemHistory;
 
 class ItemController extends Controller
 {
@@ -54,8 +55,14 @@ class ItemController extends Controller
     		return View('item', $this->PrepareData())
     			->with('inputs', $input)
     			->withErrors("Must choose material");
-    				
+    	
    		$item = Item::create($input);
+   		$itemHist = array(
+   				'item_id' => $item->id,
+   				'purchase_price' => $item->purchase_price,
+   				'sell_price' => $item->sell_price,
+   		);
+   		ItemHistory::create($itemHist);
    		return View('item', $this->PrepareData())->with('success', 'ok');
     }
     
@@ -76,5 +83,34 @@ class ItemController extends Controller
     		'quantity' => $item->quantity,
     	); 
     	return json_encode($json_obj);
+    }
+    
+    public function SaveStock(){
+    	$input = Input::all();
+    	if(Input::get('item_id') == '-')
+    		return View('stock', $this->PrepareData())
+    		->with('inputs', $input)
+    		->withErrors("Must choose Item");
+    	
+    	$validation = Validator::make($input, Item::$rulesStock);
+    	if (!$validation->passes())
+    		return View('stock',$this->PrepareData())
+    		->with('inputs', $input)
+    		->withErrors($validation);
+    	
+    	$itemHist = array(
+    			'item_id' => Input::get('item_id'),
+    			'purchase_price' => Input::get('purchase_price'),
+    			'sell_price' => Input::get('sell_price'),
+    	);
+    	ItemHistory::create($itemHist);
+    	
+    	$item = Item::find(Input::get('item_id'));
+    	$item->purchase_price = Input::get('purchase_price');
+    	$item->sell_price = Input::get('sell_price');
+    	$item->quantity +=  Input::get('quantity');
+    	$item->save();
+    	
+    	return View('stock', $this->PrepareData())->with('success', 'ok');
     }
 }
