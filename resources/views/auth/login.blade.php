@@ -55,6 +55,9 @@
             <li>
                 <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
             </li>
+            <li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick = $("#menu-close").click();>Login</button>
+            </li>
         </ul>
     </nav>
 
@@ -221,7 +224,7 @@
     <!-- Map -->
     <section id="contact" class="map">
         <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1048.049255292645!2d110.63900678659992!3d-7.364305710098245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x018632de3b6f9eb5!2sPasar+Karanggede!5e0!3m2!1sen!2sjp!4v1464609551800"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3327.3479557620453!2d110.63737698483992!3d-7.364448374488984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xef682378fe754a88!2sGas+Batik!5e0!3m2!1sen!2sus!4v1464694150403"
         width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" >
         </iframe>
     </section>
@@ -257,7 +260,35 @@
             </div>
         </div>
     </footer>
-
+    
+    <!--  Modal for login form-->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  	<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Admin login</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" id="form-login">
+          {!! csrf_field() !!}
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Email</label>
+            <input name="email" type="email" placeholder="Email" value="{{ old('email') }}" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Password</label>
+            <input name="password" id="password" type="password" class="form-control" placeholder="Password"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" onclick =$("#form-login").submit();>Login</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- jQuery -->
     <script src="../resources/assets/js/jquery.js"></script>
 
