@@ -18,7 +18,7 @@ class ItemController extends Controller
     }
     
     public function PrepareData(){
-    	return ['items' => Item::all(), 'vendors' => Vendor::all(), 'types' => Type::all(), 'materials' => Material::all()];
+    	return ['vendors' => Vendor::all(), 'types' => Type::all(), 'materials' => Material::all()];
     }
     
     public function GetView()

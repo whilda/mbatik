@@ -21,8 +21,8 @@
     <!-- Custom styles for this template -->
     <link href="../resources/assets/css/dashboard.css" rel="stylesheet">
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" >
-	<link href="../resources/assets/css/jquery.tagit.css" rel="stylesheet" type="text/css">
-	<link href="../resources/assets/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+	<link href="../resources/assets/css/ui.jqgrid-bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="../resources/assets/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -99,6 +99,10 @@
     ================================================== -->
     <script src="../resources/assets/js/dashboard.js"></script>
     <script src="../resources/assets/js/tag-it.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../resources/assets/js/i18n/grid.locale-en.js"></script>
+    <script src="../resources/assets/js/jquery.jqGrid.min.js"></script>
+    <script src="../resources/assets/js/bootstrap-datepicker.js"></script>
+    <script src="../resources/assets/js/bootstrap3-typeahead.js"></script>
     @yield('script')
   </body>
 </html>

@@ -126,40 +126,10 @@
 			    </div>
 			  </div>
 			</form>
-			<table class="table table-striped table-bordered">
-		        <thead>
-		            <tr>
-				        <th>Code</th>
-				        <th>Vendor</th>
-				        <th>Type</th>
-				        <th>Material</th>
-				        <th>Note</th>
-				        <th>Purchase</th>
-				        <th>Sell</th>
-				        <th>Quantity</th>
-		            </tr>
-		        </thead>
-		        <tbody>
-		        @if ($items->count())
-		            @foreach ($items as $item)
-		                <tr>
-					          <td>{{ $item->code }}</td>
-					          <td>{{ $item->vendor->name }}</td>
-					          <td>{{ $item->type->name }}</td>
-					          <td>{{ $item->material->name }}</td>
-					          <td>{{ $item->note }}</td>
-					          <td>{{ $item->purchase_price }}</td>
-					          <td>{{ $item->sell_price }}</td>
-					          <td>{{ $item->quantity }}</td>
-		                </tr>
-		            @endforeach
-		        @else
-		    		<tr>
-						<td colspan="7">There are no item</td>
-		            </tr>
-				@endif
-		        </tbody>
-		    </table>
+		    <div style="margin-left:20px;">
+			    <table id="jqGrid"></table>
+			    <div id="jqGridPager"></div>
+			</div>
 @endsection
 
 @section('script')
@@ -183,5 +153,175 @@
 			$note = $("#note").val();
 			$("#code").val($vendor_id+"-"+$type_id+"-"+$material_id+"-"+$note);
 		}
+	</script>
+	<script>
+	$.jgrid.defaults.responsive = true;
+	$.jgrid.defaults.styleUI = 'Bootstrap';
+    $(document).ready(function () {
+		prepareSearchDataGrid();
+        setHeaderGrid();
+        setSearchButton();
+        setWidthGrid();
+        fetchGridData();
+    });
+	var searchValueVendor;
+	var searchValueType;
+	var searchValueMaterial;
+    function prepareSearchDataGrid(){
+    	$.ajax({
+            url: "./api/vendor",
+            success: function (jsonString) {
+                searchValueVendor = ':[all]';
+            	var result = JSON.parse(jsonString);
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    searchValueVendor += (';' + item.name + ':' + item.name);                         
+                }
+            },
+            async: false
+        });
+
+    	$.ajax({
+            url: "./api/type",
+            success: function (jsonString) {
+            	searchValueType = ':[all]';
+            	var result = JSON.parse(jsonString);
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    searchValueType += (';' + item.name + ':' + item.name);                         
+                }
+            },
+            async: false
+        });
+
+    	$.ajax({
+            url: "./api/material",
+            success: function (jsonString) {
+            	searchValueMaterial = ':[all]';
+            	var result = JSON.parse(jsonString);
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    searchValueMaterial += (';' + item.name + ':' + item.name);                         
+                }
+            },
+            async: false
+        });
+    }
+
+    function setWidthGrid(){
+    	var newWidth = $("#jqGrid").closest(".ui-jqgrid").parent().width();
+    	$("#jqGrid").jqGrid("setGridWidth", newWidth, true);
+    }
+    
+	function setHeaderGrid() {
+		console.log(searchValueVendor);
+		// Setting header of the table
+        $("#jqGrid").jqGrid({
+            colModel: [
+                {
+					label: 'Code',
+                    name: 'Code',
+                    width: 150,
+                },
+                {
+					label: 'Vendor',
+                    name: 'Vendor',
+                    width: 150,
+                    stype: "select",
+                    searchoptions:{value:searchValueVendor},
+                },
+                {
+					label: 'Type',
+                    name: 'Type',
+                    width: 150,
+                    stype: "select",
+                    searchoptions:{value:searchValueType},
+                },
+                {
+					label: 'Material',
+                    name: 'Material',
+                    width: 150,
+                    stype: "select",
+                    searchoptions:{value:searchValueMaterial},
+                },
+                {
+					label: 'Purchase',
+                    name: 'Purchase',
+                    width: 150,
+                    sorttype:'integer',
+					formatter: 'number',
+					align: 'right',
+                },
+                {
+					label: 'Sell',
+                    name: 'Sell',
+                    width: 150,
+                    sorttype:'integer',
+					formatter: 'number',
+					align: 'right',
+                },
+                {
+					label: 'Quantity',
+                    name: 'Quantity',
+                    width: 150,
+                    sorttype:'integer',
+					align: 'right',
+                }
+            ],
+
+            viewrecords: true, // show the current page, data rang and total records on the toolbar
+            rowNum: 30,
+            height: 500,
+			datatype: 'local',
+            pager: "#jqGridPager"
+        });
+	}
+
+	function setSearchButton(){
+     	// activate the build in search with multiple option
+        $('#jqGrid').navGrid("#jqGridPager", {                
+            search: true, // show search button on the toolbar
+            add: false,
+            edit: false,
+            del: false,
+            refresh: true
+        },
+        {}, // edit options
+        {}, // add options
+        {}, // delete options
+        { multipleSearch: true } // search options - define multiple search
+        );
+    }
+    
+    function fetchGridData() {
+        var gridArrayData = [];
+		// show loading message
+		$("#jqGrid")[0].grid.beginReq();
+        $.ajax({
+            url: "./api/item",
+            success: function (jsonString) {
+            	var result = JSON.parse(jsonString);
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    gridArrayData.push({
+                        Code: item.code,
+                        Vendor: item.vendor,
+                        Type: item.type,
+                        Material: item.material,
+                        Note: item.note,
+                        Purchase: item.purchase,
+                        Sell: item.sell,
+                        Quantity: item.quantity,
+                    });                            
+                }
+				// set the new data
+				$("#jqGrid").jqGrid('setGridParam', { data: gridArrayData});
+				// hide the show message
+				$("#jqGrid")[0].grid.endReq();
+				// refresh the grid
+				$("#jqGrid").trigger('reloadGrid');
+            }
+        });
+    }
 	</script>
 @endsection

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\AssetHistory;
 use App\Item;
-use DB;
+use App\Vendor;
+use App\Type;
+use App\Material;
 
 class DashboardController extends Controller
 {
@@ -17,6 +19,7 @@ class DashboardController extends Controller
     {
     	
     }
+    
     public function api_asset()
     {
     	$asset_histories = AssetHistory::all();
@@ -24,6 +27,54 @@ class DashboardController extends Controller
     	foreach ($asset_histories as $a){
     		$date = date_parse($a->created_at);
     		array_push($output,[mktime(0,0,0,$date['month'],$date['day'],$date['year'])*1000,$a->asset]);
+    	}
+    	echo json_encode($output);
+    }
+    
+    public function api_item()
+    {
+    	$items = Item::all();
+    	$output = array();
+    	foreach ($items as $a){
+    		$item['code'] = $a->code;
+    		$item['vendor'] = $a->vendor->name;
+    		$item['type'] = $a->type->name;
+    		$item['material'] = $a->material->name;
+    		$item['note'] = $a->note;
+    		$item['purchase'] = $a->purchase_price;
+    		$item['sell'] = $a->sell_price;
+    		$item['quantity'] = $a->quantity;
+    		array_push($output,$item);
+    	}
+    	echo json_encode($output);
+    }
+    
+    public function api_vendor()
+    {
+    	$vendors = Vendor::all();
+    	$output = array();
+    	foreach ($vendors as $a){
+    		array_push($output,$a);
+    	}
+    	echo json_encode($output);
+    }
+    
+    public function api_type()
+    {
+    	$types = Type::all();
+    	$output = array();
+    	foreach ($types as $a){
+    		array_push($output,$a);
+    	}
+    	echo json_encode($output);
+    }
+    
+    public function api_material()
+    {
+    	$materials = Material::all();
+    	$output = array();
+    	foreach ($materials as $a){
+    		array_push($output,$a);
     	}
     	echo json_encode($output);
     }

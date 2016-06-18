@@ -255,6 +255,7 @@
                         </li>
                     </ul>
                     <hr class="small">
+                    <p class="text-muted">Developed by <a href="https://jp.linkedin.com/in/whilda-chaq-b3b4724b">Whilda Chaq</a></p>
                     <p class="text-muted">Copyright &copy; Gas Batik 2016</p>
                 </div>
             </div>
