@@ -155,6 +155,14 @@
 		}
 	</script>
 	<script>
+	var show = 1;
+	$("#h-s").click(function(){
+	    if(show == 1){
+	    	
+	    }
+	});
+	</script>
+	<script>
 	$.jgrid.defaults.responsive = true;
 	$.jgrid.defaults.styleUI = 'Bootstrap';
     $(document).ready(function () {
@@ -245,6 +253,11 @@
                     searchoptions:{value:searchValueMaterial},
                 },
                 {
+					label: 'Note',
+                    name: 'Note',
+                    width: 150
+                },
+                {
 					label: 'Purchase',
                     name: 'Purchase',
                     width: 150,
@@ -279,8 +292,9 @@
 
 	function setSearchButton(){
      	// activate the build in search with multiple option
+     	$('#jqGrid').jqGrid('filterToolbar');
         $('#jqGrid').navGrid("#jqGridPager", {                
-            search: true, // show search button on the toolbar
+            search: false, // show search button on the toolbar
             add: false,
             edit: false,
             del: false,
