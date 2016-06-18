@@ -10,6 +10,33 @@
 
 @section('content')
           <h1 class="page-header">Dashboard</h1>
+		  <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <span class="glyphicon glyphicon-usd" aria-hidden="true" style="font-size: 60px">
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div style="font-size: 35px">Rp {{ number_format($asset) }}</div>
+                                        <div>Today's asset!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Asset</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
           <div id="container" style="height: 400px; min-width: 310px"></div>
           <br />
           <div id="dualaxis" style="height: 400px; min-width: 310px"></div>

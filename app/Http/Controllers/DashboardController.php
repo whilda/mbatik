@@ -7,6 +7,7 @@ use App\Item;
 use App\Vendor;
 use App\Type;
 use App\Material;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -85,7 +86,9 @@ class DashboardController extends Controller
     }
  	
     public function PrepareData(){
-    	return ['items' => Item::where('quantity','<','5')->get()];
+    	$query = 'select SUM(X.A) as asset from (select (purchase_price * quantity) as A from items) as X';
+    	$asset = DB::select($query)[0]->asset;
+    	return ['items' => Item::where('quantity','<','5')->get(), 'asset' => $asset];
     }
     public function transaction()
     {
