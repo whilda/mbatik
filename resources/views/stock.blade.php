@@ -46,25 +46,25 @@
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Vendor</label>
 			    <div class="col-sm-10">
-			      <input type="text" value='' class="form-control" id="vendor" name="vendor" placeholder="-" disabled>  
+			      <input type="text" value='@if ($errors->any()){{ $inputs['vendor'] }}@endif' class="form-control" id="vendor" name="vendor" placeholder="-" readonly="readonly">  
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Type</label>
 			    <div class="col-sm-10">
-			      <input type="text" value='' class="form-control" id="type" name="type" placeholder="-" disabled>  
+			      <input type="text" value='@if ($errors->any()){{ $inputs['type'] }}@endif' class="form-control" id="type" name="type" placeholder="-" readonly="readonly">  
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Material</label>
 			    <div class="col-sm-10">
-			      <input type="text" value='' class="form-control" id="material" name="material" placeholder="-" disabled>  
+			      <input type="text" value='@if ($errors->any()){{ $inputs['material'] }}@endif' class="form-control" id="material" name="material" placeholder="-" readonly="readonly">  
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Note</label>
 			    <div class="col-sm-10">
-			      <input type="text" value='' class="form-control" id="note" name="note" placeholder="-" disabled>  
+			      <input type="text" value='@if ($errors->any()){{ $inputs['note'] }}@endif' class="form-control" id="note" name="note" placeholder="-" readonly="readonly">  
 			    </div>
 			  </div>
 			  <div class="form-group row">
@@ -88,7 +88,7 @@
 			  <div class="form-group row">
 			    <label for="inputPassword3" class="col-sm-2 form-control-label">Old Quantity</label>
 			    <div class="col-sm-10">
-			      <input type="number" value='' class="form-control" id="old_quantity" name="old_quantity" placeholder="-" disabled>
+			      <input type="number" value='@if ($errors->any()){{ $inputs['old_quantity'] }}@endif' class="form-control" id="old_quantity" name="old_quantity" placeholder="-" readonly="readonly">
 			    </div>
 			  </div>
 			  <div class="form-group row">

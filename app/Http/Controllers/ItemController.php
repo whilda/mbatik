@@ -88,13 +88,13 @@ class ItemController extends Controller
     public function SaveStock(){
     	$input = Input::all();
     	if(Input::get('item_id') == '-')
-    		return View('stock', $this->PrepareData())
+    		return $this->GetStockView()
     		->with('inputs', $input)
     		->withErrors("Must choose Item");
     	
     	$validation = Validator::make($input, Item::$rulesStock);
     	if (!$validation->passes())
-    		return View('stock',$this->PrepareData())
+    		return $this->GetStockView()
     		->with('inputs', $input)
     		->withErrors($validation);
     	
@@ -111,6 +111,6 @@ class ItemController extends Controller
     	$item->quantity +=  Input::get('quantity');
     	$item->save();
     	
-    	return View('stock', $this->PrepareData())->with('success', 'ok');
+    	return $this->GetStockView()->with('success', 'ok');
     }
 }
