@@ -37,6 +37,8 @@
                     <br />
                     <br />
                     <br />
+                    <br />
+                    <br />
           <div id="container" style="height: 400px; min-width: 310px"></div>
           <br />
           <div id="dualaxis" style="height: 400px; min-width: 310px"></div>

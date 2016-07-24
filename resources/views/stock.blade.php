@@ -27,7 +27,7 @@
 			    <label for="inputEmail3" class="col-sm-2 form-control-label">Item Code</label>
 			    <div class="col-sm-10">
 					<select class="form-control" id="item_id" name="item_id">
-					  	<option value="-">-</option>
+					  	<option value="-">Select item code</option>
 					  	@if ($items->count())
 				            @foreach ($items as $item)
 				                <option 

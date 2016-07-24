@@ -98,11 +98,12 @@
     <!-- App JavaScript
     ================================================== -->
     <script src="../resources/assets/js/dashboard.js"></script>
-    <script src="../resources/assets/js/tag-it.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../resources/assets/js/tag-it.min.js"></script>
     <script src="../resources/assets/js/i18n/grid.locale-en.js"></script>
     <script src="../resources/assets/js/jquery.jqGrid.min.js"></script>
     <script src="../resources/assets/js/bootstrap-datepicker.js"></script>
     <script src="../resources/assets/js/bootstrap3-typeahead.js"></script>
+    <script src="../resources/assets/js/clone-form-td.js"></script>
     @yield('script')
   </body>
 </html>

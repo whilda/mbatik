@@ -21,6 +21,23 @@ class ItemController extends Controller
     	return ['vendors' => Vendor::all(), 'types' => Type::all(), 'materials' => Material::all()];
     }
     
+    /* General Function */
+    public function GetItem($id)
+    {
+    	$item = Item::where("id",$id)->first();
+    	$json_obj = array(
+    			'vendor' => $item->vendor->name,
+    			'type' => $item->type->name,
+    			'material' => $item->material->name,
+    			'note' => $item->note,
+    			'purchase_price' => $item->purchase_price,
+    			'sell_price' => $item->sell_price,
+    			'quantity' => $item->quantity,
+    	);
+    	return json_encode($json_obj);
+    }
+    
+    /* Item Save */
     public function GetView()
     {
     	return View('item', $this->PrepareData());
@@ -66,25 +83,11 @@ class ItemController extends Controller
    		return View('item', $this->PrepareData())->with('success', 'ok');
     }
     
+    /* Stock */
     public function GetStockView()
     {
     	return View('stock', ["items" => Item::all()]);
     }
-	public function GetItem($id)
-    {
-    	$item = Item::where("id",$id)->first();
-    	$json_obj = array(
-    		'vendor' => $item->vendor->name,
-    		'type' => $item->type->name,
-    		'material' => $item->material->name,
-    		'note' => $item->note,
-    		'purchase_price' => $item->purchase_price,
-    		'sell_price' => $item->sell_price,
-    		'quantity' => $item->quantity,
-    	); 
-    	return json_encode($json_obj);
-    }
-    
     public function SaveStock(){
     	$input = Input::all();
     	if(Input::get('item_id') == '-')
@@ -112,5 +115,15 @@ class ItemController extends Controller
     	$item->save();
     	
     	return $this->GetStockView()->with('success', 'ok');
+    }
+    
+    /* Transaction */
+    public function GetTransactionView()
+    {
+    	return View('transaction', ["items" => Item::all()]);
+    }
+    public function SaveTransaction(){
+    	$input = Input::all();
+    	return $input;
     }
 }

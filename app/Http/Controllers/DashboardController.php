@@ -90,8 +90,4 @@ class DashboardController extends Controller
     	$asset = DB::select($query)[0]->asset;
     	return ['items' => Item::where('quantity','<','5')->get(), 'asset' => $asset];
     }
-    public function transaction()
-    {
-    	return view('transaction');
-    }
 }

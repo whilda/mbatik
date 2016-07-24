@@ -50,7 +50,7 @@
                 <a href="#services" onclick = $("#menu-close").click(); >Services</a>
             </li>
             <li>
-                <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
+                <a href="#portfolio" onclick = $("#menu-close").click(); >Album</a>
             </li>
             <li>
                 <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
@@ -65,7 +65,7 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1>Gas Batik</h1>
-            <h3>Toko Batik Karanggede</h3>
+            <h3>Pasar Karanggede (Kios Atas)</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">Tentang kami</a>
         </div>
@@ -76,9 +76,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Batik yang dijual di Gas Batik merupakan batik kualitas nomor satu</h2>
-                    <p class="lead">
-                    Batik stylish yang kekinian sangat cocok untuk dipakai dimanapun dan kapanpun
+                	<h2>Menyediakan</h2>
+                	<p class="lead">
+                    Aneka Batik, Sarimbit Keluarga, Kain, Kebaya, Dll.
+                    Melayani pemesanan seragam batik.
                     </p>
                 </div>
             </div>
@@ -100,24 +101,24 @@
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                                <i class="fa fa-heart-o fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
                                     <strong>Exclusive</strong>
                                 </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <p>Model/motif yang disediakan sulit ditemukan di tempat lain</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                                <i class="fa fa-eye fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
                                     <strong>Stylish</strong>
                                 </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <p>Batik stylish yang kekinian sangat cocok untuk dipakai dimanapun dan kapanpun</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -129,7 +130,7 @@
                                 <h4>
                                     <strong>Quality</strong>
                                 </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <p>Batik yang dijual di Gas Batik merupakan batik kualitas nomor satu</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -141,7 +142,7 @@
                                 <h4>
                                     <strong>Guarantee</strong>
                                 </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <p>Jika barang yang dibeli dari kami ternyata memiliki kerusakan, dapatkan refund 100%.</p>
                             </div>
                         </div>
                     </div>
@@ -166,40 +167,40 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Our Work</h2>
+                    <h2>Album</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../resources/image/portfolio-1.jpg">
+                                    <img class="img-portfolio img-responsive" src="../resources/image/1.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../resources/image/portfolio-2.jpg">
+                                    <img class="img-portfolio img-responsive" src="../resources/image/2.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../resources/image/portfolio-3.jpg">
+                                    <img class="img-portfolio img-responsive" src="../resources/image/3.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
-                                    <img class="img-portfolio img-responsive" src="../resources/image/portfolio-4.jpg">
+                                    <img class="img-portfolio img-responsive" src="../resources/image/4.jpg">
                                 </a>
                             </div>
                         </div>
                     </div>
                     <!-- /.row (nested) -->
-                    <a href="#" class="btn btn-dark">View More Items</a>
+                    <a href="https://www.facebook.com/guyub.haq" class="btn btn-dark">View More Items</a>
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
@@ -214,8 +215,8 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h3>Lihat koleksi batik kami disini!!</h3>
-                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
-                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
+                    <a href="https://www.facebook.com/guyub.haq" class="btn btn-lg btn-light">Click Me!</a>
+                    <a href="https://www.facebook.com/guyub.haq" class="btn btn-lg btn-dark">Look at Me!</a>
                 </div>
             </div>
         </div>
@@ -234,11 +235,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Gas Batik Karanggede</strong>
+                    <h4><strong>Gas Batik</strong>
                     </h4>
-                    <p>Ps. Karanggede<br>Toko depan No. 17, Karanggede 50776</p>
+                    <p>Pasar Karanggede Kios Atas</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                        <li><i class="fa fa-phone fa-fw"></i> (+62) 81-329-778899</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:guyubhana@gmail.com">guyubhana@gmail.com</a>
                         </li>
                     </ul>

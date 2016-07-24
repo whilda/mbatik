@@ -27,7 +27,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/test', 'ItemController@run');
     
     Route::get('/', 'DashboardController@overview');
-    Route::get('/transaction', 'DashboardController@transaction');
+    
     Route::get('/api/asset', 'DashboardController@api_asset');
     Route::get('/api/item', 'DashboardController@api_item');
     Route::get('/api/vendor', 'DashboardController@api_vendor');
@@ -48,6 +48,9 @@ Route::group(['middleware' => 'web'], function () {
     
     Route::get('/stock', 'ItemController@GetStockView');
     Route::post('/stock', 'ItemController@SaveStock');
+    
+    Route::get('/transaction', 'ItemController@GetTransactionView');
+    Route::post('/transaction', 'ItemController@SaveTransaction');
     
     Route::get('/item/{id}', 'ItemController@GetItem');
 });
