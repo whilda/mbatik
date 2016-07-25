@@ -9,6 +9,11 @@
 @endsection
 
 @section('content')
+		@if (isset($success))
+			<div class="alert alert-success" style="padding-left: 2em;">
+	        Data has been saved successfully
+	    </div>
+		@endif
       <form action="#" method="post" id="sign-up_area" role="form" onsubmit="return confirm('Are you sure you want to submit?');">
         <legend>Transaction</legend>
         <!-- Text input-->
@@ -54,12 +59,12 @@
         
         <!-- Number -->
         <div class="form-group col-md-2">
-          <input id="ID1_qty" name="ID1_qty" type="number" class="input_qty form-control" required="" onkeyup="calc_total()">
+          <input id="ID1_qty" name="ID1_qty" type="number" class="input_qty form-control" required="" onchange="calc_total()" onkeyup="calc_total()">
         </div>
         
         <!-- Select Basic -->
         <div class="form-group col-md-3">
-            <select class="select_item form-control" name="ID1_item" id="ID1_item">
+            <select class="select_item form-control" name="ID1_item" id="ID1_item" onchange="set_price(1)">
               <option value="" selected="selected" disabled="disabled">Select item code</option>
               @if ($items->count())
 		            @foreach ($items as $item)
@@ -83,7 +88,7 @@
         
         <!-- Number -->
         <div class="form-group col-md-2">
-          <input id="ID1_unit_price" name="ID1_unit_price" type="number" class="input_unit_price form-control" onkeyup="calc_total()">
+          <input id="ID1_unit_price" name="ID1_unit_price" type="number" class="input_unit_price form-control" required="" onchange="calc_total()" onkeyup="calc_total()">
         </div>
 
 		<!-- Number -->
@@ -92,13 +97,17 @@
         </div>
         </div><!-- end #entry1 -->
         <div class="row" align="right">
-       		<label class="control-label col-md-10" style="font-size: large;">Total :</label>
+       		<label class="control-label col-md-10" style="font-size: large;">Total : Rp </label>
        		<label id="trans_total" name="trans_total" class="control-label col-md-2" style="font-size: large;margin-left: -15px;">0</label>
         </div>
         
+        <!-- Hidden Input -->
+        <input type="hidden" id="num" name="num">
+        <input type="hidden" id="total" name="num">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        
         <!-- Button -->
         <p>
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <button class="btn btn-primary">Submit</button>
         <button type="button" id="btnAdd" name="btnAdd" class="btn btn-info">+</button>
         <button type="button" id="btnDel" name="btnDel" class="btn btn-danger">-</button>
@@ -120,7 +129,19 @@
 			total += sum;
 			$('#ID'+i+'_sum').val(sum);
 		}
-		$('#trans_total').text(total);
+		var formatted = parseFloat((""+total).replace(/,/g, ""))
+					        //.toFixed(2)
+					        .toString()
+					        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+		$('#trans_total').text(formatted);
+		$('#total').val(total);
+	}
+	function set_price(i){
+		$id = $("#ID"+i+"_item").val();
+		$.getJSON( "./item/"+$id, function( data ) {
+			$("#ID"+i+"_unit_price").val(data.sell_price);
+			calc_total()
+		});
 	}
 	</script>
 @endsection

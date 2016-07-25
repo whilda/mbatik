@@ -46,7 +46,7 @@ $(function () {
         newElem.find('.input_qty').attr('id', 'ID' + newNum + '_qty').attr('name', 'ID' + newNum + '_qty').val('');
 
         // Item - select
-        newElem.find('.select_item').attr('id', 'ID' + newNum + '_item').attr('name', 'ID' + newNum + '_item').val('');
+        newElem.find('.select_item').attr('id', 'ID' + newNum + '_item').attr('name', 'ID' + newNum + '_item').attr('onchange', 'set_price(' + newNum + ')').val('');
         
         // Note - text
         newElem.find('.input_note').attr('id', 'ID' + newNum + '_note').attr('name', 'ID' + newNum + '_note').val('');
@@ -60,7 +60,7 @@ $(function () {
     // Insert the new element after the last "duplicatable" input field
         $('#entry' + num).after(newElem);
         $('#ID' + newNum + '_title').focus();
-
+        $('#num').val(newNum);
     // Enable the "remove" button. This only shows once you have a duplicated section.
         $('#btnDel').attr('disabled', false);
 
@@ -76,6 +76,8 @@ $(function () {
                 var num = $('.clonedInput').length;
                 // how many "duplicatable" input fields we currently have
                 $('#entry' + num).slideUp('slow', function () {$(this).remove();
+                $('#num').val($('.clonedInput').length);
+                calc_total();
                 // if only one element remains, disable the "remove" button
                     if (num -1 === 1)
                 $('#btnDel').attr('disabled', true);
