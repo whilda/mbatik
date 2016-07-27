@@ -31,11 +31,11 @@
 	        <div align="center" class="form-group col-md-1">
 	          <label style="padding-top: 5px;font-size: large;">No</label>
 	        </div>
-	        <div align="center" class="form-group col-md-2">
-	          <label style="padding-top: 5px;font-size: large;">Unit</label>
-	        </div>
 	        <div align="center" class="form-group col-md-3">
 	          <label style="padding-top: 5px;font-size: large;">Item</label>
+	        </div>
+	        <div align="center" class="form-group col-md-2">
+	          <label style="padding-top: 5px;font-size: large;">Unit</label>
 	        </div>
 	       	<div align="center" class="form-group col-md-2">
 	          <label style="padding-top: 5px;font-size: large;">Note</label>
@@ -57,11 +57,6 @@
           <label id="reference" name="reference" class="heading-reference" style="padding-top: 5px;font-size: large;">1</label>
         </div>
         
-        <!-- Number -->
-        <div class="form-group col-md-2">
-          <input id="ID1_qty" name="ID1_qty" type="number" class="input_qty form-control" required="" onchange="calc_total()" onkeyup="calc_total()">
-        </div>
-        
         <!-- Select Basic -->
         <div class="form-group col-md-3">
             <select class="select_item form-control" name="ID1_item" id="ID1_item" onchange="set_price(1)">
@@ -81,6 +76,11 @@
             </select>
           </div>
 
+		<!-- Number -->
+        <div class="form-group col-md-2">
+          <input id="ID1_qty" name="ID1_qty" type="number" class="input_qty form-control" required="" onchange="calc_total()" onkeyup="calc_total()">
+        </div>
+        
         <!-- Text input-->
         <div class="form-group col-md-2">
           <input id="ID1_note" name="ID1_note" type="text" class="input_note form-control">
@@ -102,8 +102,8 @@
         </div>
         
         <!-- Hidden Input -->
-        <input type="hidden" id="num" name="num">
-        <input type="hidden" id="total" name="num">
+        <input type="hidden" id="num" name="num" val="1">
+        <input type="hidden" id="total" name="total">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         
         <!-- Button -->
@@ -135,6 +135,7 @@
 					        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 		$('#trans_total').text(formatted);
 		$('#total').val(total);
+		$('#num').val(num);
 	}
 	function set_price(i){
 		$id = $("#ID"+i+"_item").val();

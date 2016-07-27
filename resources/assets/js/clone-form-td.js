@@ -60,7 +60,7 @@ $(function () {
     // Insert the new element after the last "duplicatable" input field
         $('#entry' + num).after(newElem);
         $('#ID' + newNum + '_title').focus();
-        $('#num').val(newNum);
+
     // Enable the "remove" button. This only shows once you have a duplicated section.
         $('#btnDel').attr('disabled', false);
 

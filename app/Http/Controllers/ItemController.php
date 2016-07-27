@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Input;
 use Validator;
+use DB;
 use App\Item;
 use App\Vendor;
 use App\Type;
 use App\Material;
 use App\ItemHistory;
+use App\Transaction;
 
 class ItemController extends Controller
 {
@@ -26,13 +28,13 @@ class ItemController extends Controller
     {
     	$item = Item::where("id",$id)->first();
     	$json_obj = array(
-    			'vendor' => $item->vendor->name,
-    			'type' => $item->type->name,
-    			'material' => $item->material->name,
-    			'note' => $item->note,
+    			'vendor'		=> $item->vendor->name,
+    			'type'			=> $item->type->name,
+    			'material'		=> $item->material->name,
+    			'note'			=> $item->note,
     			'purchase_price' => $item->purchase_price,
-    			'sell_price' => $item->sell_price,
-    			'quantity' => $item->quantity,
+    			'sell_price'	=> $item->sell_price,
+    			'quantity'		=> $item->quantity,
     	);
     	return json_encode($json_obj);
     }
@@ -102,9 +104,9 @@ class ItemController extends Controller
     		->withErrors($validation);
     	
     	$itemHist = array(
-    			'item_id' => Input::get('item_id'),
+    			'item_id'		=> Input::get('item_id'),
     			'purchase_price' => Input::get('purchase_price'),
-    			'sell_price' => Input::get('sell_price'),
+    			'sell_price'	=> Input::get('sell_price'),
     	);
     	ItemHistory::create($itemHist);
     	
@@ -123,7 +125,42 @@ class ItemController extends Controller
     	return View('transaction', ["items" => Item::all()]);
     }
     public function SaveTransaction(){
-    	$input = Input::all();
-    	return $input;
+DB::transaction(function () {
+    	/* Insert transaction */
+    	$transaction_input = array(
+    			'customer' 		=> Input::get('cust_name'),
+    			'trans_date' 	=> Input::get('trans_date'),
+    			'total' 		=> Input::get('total'),
+    	);
+    	$transaction = Transaction::create($transaction_input);
+    	$total_profit=0;
+    	
+    	$num = (int)Input::get('num');
+
+		/* attach detail transaction */
+    	for($i = 1; $i <= $num ; $i++){
+    		$item		= Item::find(Input::get('ID'.$i.'_item'));
+    		$unit_prof	= (Input::get('ID'.$i.'_unit_price') - $item->purchase_price);
+    		$sum_prof	= $unit_prof * Input::get('ID'.$i.'_qty');
+    		$total_profit += $sum_prof;
+    		$detail = array(
+    			'qty'			=> Input::get('ID'.$i.'_qty'),
+    			'note'			=> Input::get('ID'.$i.'_note'),
+    			'unit_price'	=> Input::get('ID'.$i.'_unit_price'),
+    			'unit_profit'	=> $unit_prof,
+    			'sum_price'		=> Input::get('ID'.$i.'_sum'),
+    			'sum_profit'	=> $sum_prof ,
+    		);
+    		$transaction->items()->attach(Input::get('ID'.$i.'_item'), $detail);
+    		
+    		$item->quantity -=  (int)Input::get('ID'.$i.'_qty'); 
+    		$item->save();
+    	}
+    	
+    	/*Update profit */
+    	$transaction->profit = $total_profit;
+    	$transaction->save();
+});
+	return View('transaction', ["items" => Item::all()])->with('success', 'ok');
     }
 }
