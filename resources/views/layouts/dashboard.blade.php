@@ -24,6 +24,9 @@
 	<link href="../resources/assets/css/ui.jqgrid-bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="../resources/assets/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../resources/assets/js/ie-emulation-modes-warning.js"></script>
@@ -104,6 +107,8 @@
     <script src="../resources/assets/js/bootstrap-datepicker.js"></script>
     <script src="../resources/assets/js/bootstrap3-typeahead.js"></script>
     <script src="../resources/assets/js/clone-form-td.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
     @yield('script')
   </body>
 </html>

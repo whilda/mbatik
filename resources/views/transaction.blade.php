@@ -115,6 +115,20 @@
 
         </fieldset>
         </form>
+        <table id="dg" style="width:100%;height:750px"
+			url="../php/datagrid22_getdata.php" 
+			title="Transactions"
+			singleSelect="true" fitColumns="true">
+		<thead>
+			<tr>
+				<th field="id" width="80">Transaction</th>
+				<th field="customer" width="100">Customer</th>
+				<th field="trans_date" align="right" width="80">Date</th>
+				<th field="profit" align="right" width="80">Profit</th>
+				<th field="total" width="220">Total</th>
+			</tr>
+		</thead>
+	</table>
 @endsection
 
 @section('script')
@@ -144,5 +158,41 @@
 			calc_total()
 		});
 	}
+	$(function(){
+		$('#dg').datagrid({
+			view: detailview,
+			detailFormatter:function(index,row){
+				return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
+			},
+			onExpandRow: function(index,row){
+				$('#ddv-'+index).datagrid({
+					url:'../php/datagrid22_getdetail.php?transaction_id='+row.id,
+					fitColumns:true,
+					singleSelect:true,
+					rownumbers:true,
+					loadMsg:'',
+					height:'auto',
+					columns:[[
+						{field:'item_id',title:'Item',width:'10%'},
+						{field:'qty',title:'Quantity',align:'right',width:'20%'},
+						{field:'note',title:'Note',align:'right',width:'20%'},
+						{field:'unit_price',title:'Unit Price',align:'right',width:'10%'},
+						{field:'unit_profit',title:'Unit Profit',align:'right',width:'10%'},
+						{field:'sum_price',title:'Sum Price',align:'right',width:'15%'},
+						{field:'sum_profit',title:'Sum Profit',align:'right',width:'15%',}
+					]],
+					onResize:function(){
+						$('#dg').datagrid('fixDetailRowHeight',index);
+					},
+					onLoadSuccess:function(){
+						setTimeout(function(){
+							$('#dg').datagrid('fixDetailRowHeight',index);
+						},0);
+					}
+				});
+				$('#dg').datagrid('fixDetailRowHeight',index);
+			}
+		});
+	});
 	</script>
 @endsection
