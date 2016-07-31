@@ -173,7 +173,7 @@
 					loadMsg:'',
 					height:'auto',
 					columns:[[
-						{field:'item_id',title:'Item',width:'10%'},
+						{field:'code',title:'Item',width:'10%'},
 						{field:'qty',title:'Quantity',align:'right',width:'20%'},
 						{field:'note',title:'Note',align:'right',width:'20%'},
 						{field:'unit_price',title:'Unit Price',align:'right',width:'10%'},

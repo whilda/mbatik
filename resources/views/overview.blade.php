@@ -10,7 +10,7 @@
 
 @section('content')
           <h1 class="page-header">Dashboard</h1>
-		  <div class="col-lg-3 col-md-6">
+		  <div class="col-lg-3 col-md-16">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
@@ -31,15 +31,7 @@
                             </a>
                         </div>
                     </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-          <div id="container" style="height: 400px; min-width: 310px"></div>
+       <div id="container" style="min-width: 310px"></div>
           <br />
           <div id="dualaxis" style="height: 400px; min-width: 310px"></div>
           <br />

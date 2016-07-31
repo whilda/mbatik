@@ -1,6 +1,5 @@
 <?php
-	$result = array();
-	
+
 	include 'conn.php';
 	
 	$rs = mysqli_query($conn,"select * from transactions");
